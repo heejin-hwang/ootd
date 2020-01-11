@@ -1,17 +1,21 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img alt="Vue logo" width=30% src="./assets/logo.png">
+    <h2>˗ˋˏ ♡ ˎˊ˗ 오늘의 날씨에 따라 멋진 스타일링을 해보세요 ˗ˋˏ ♡ ˎˊ˗ </h2>
+    <Weather />
+    <Recommendation />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Weather from './components/Weather.vue'
+import Recommendation from './components/Recommendation.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Weather,
+    Recommendation
   }
 }
 </script>
