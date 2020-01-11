@@ -18,7 +18,6 @@
       <img src="../assets/img/sun-rise.svg" width=3% alt="">{{sunrise}}
       <img src="../assets/img/sun-set.svg" width=3% alt="">{{sunset}}
       <img src="../assets/img/wet.svg" width=3% alt="">{{humidity}}
-      <!-- <img src="../assets/img/wind.svg" width=3% alt="">{{pressure}} -->
       <img src="../assets/img/wind.svg" width=3% alt="">{{wind}}
     </div>
   </div>
@@ -45,30 +44,28 @@ export default {
   },
   methods: {
     getGeolocation() {
-      
-      // var x = document.getElementById("demo");
-      // function getLocation() {
+    
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(showPosition);
+          window.console.log('dd');
+          
         } else {
-          x.innerHTML = "Geolocation is not supported by this browser.";
+          alert("Geolocation is not supported by this browser.");
         }
-      // }
-
+      
       function showPosition(position) {
-        let url =
+        window.console.log(position.coords.latitude)
+        const url =
         `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=36b444fed9e29cbe7135eb4355f1d355`;
         // x.innerHTML = "Latitude: " + position.coords.latitude +
         // "<br>Longitude: " + position.coords.longitude;
-      }
-      axios
+        axios
         .get(url)
         .then(response => {
           this.city = response.data.main.name;
           this.currentTemp = response.data.main.temp;
           this.minTemp = response.data.main.temp_min;
           this.maxTemp = response.data.main.temp_max;
-          this.pressure = response.data.main.pressure;
           this.humidity = response.data.main.humidity + "%";
           this.wind = response.data.wind.speed + "m/s";
           this.overcast = response.data.weather[0].description;
@@ -84,6 +81,8 @@ export default {
         .catch(error => {
           window.console.log(error);
         });
+      }
+      
     },
 
 
@@ -100,7 +99,6 @@ export default {
           this.currentTemp = response.data.main.temp;
           this.minTemp = response.data.main.temp_min;
           this.maxTemp = response.data.main.temp_max;
-          this.pressure = response.data.main.pressure;
           this.humidity = response.data.main.humidity + "%";
           this.wind = response.data.wind.speed + "m/s";
           this.overcast = response.data.weather[0].description;
@@ -119,7 +117,7 @@ export default {
     }
   },
   beforeMount() {
-    this.getWeather();
+    this.getGeolocation();
   }
 };
 </script>
